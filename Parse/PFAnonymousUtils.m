@@ -37,8 +37,9 @@
 }
 
 + (BFTask *)logInInBackground {
-    PFUserAuthenticationController *controller = [Parse _currentManager].coreManager.userAuthenticationController;
-    return [controller logInUserAsyncWithAuthType:[[[self _authenticationProvider] class] authType]];
+    PFAnonymousAuthenticationProvider *provider = [self _authenticationProvider];
+    NSString *authType = [[provider class] authType];
+    return [PFUser logInWithAuthTypeInBackground:authType authData:provider.authData];
 }
 
 + (void)logInWithBlock:(PFUserResultBlock)block {
@@ -53,7 +54,7 @@
 
 + (PFUser *)_lazyLogIn {
     PFAnonymousAuthenticationProvider *provider = [self _authenticationProvider];
-    return [PFUser logInLazyUserWithAuthType:[[provider class] authType] authData:[provider authData]];
+    return [PFUser logInLazyUserWithAuthType:[[provider class] authType] authData:provider.authData];
 }
 
 @end

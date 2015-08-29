@@ -15,6 +15,7 @@
 #import "PFUnitTestCase.h"
 #import "PFUserAuthenticationController.h"
 #import "Parse_Private.h"
+#import "PFAnonymousAuthenticationProvider.h"
 
 @protocol AnonymousUtilsObserver <NSObject>
 
@@ -69,7 +70,7 @@
     }]]);
 
     PFUser *user = [PFUser user];
-    [OCMExpect([authController logInUserAsyncWithAuthType:@"anonymous"]) andReturn:[BFTask taskWithResult:user]];
+    OCMExpect([authController logInUserAsyncWithAuthType:@"anonymous" authData:[OCMArg isNotNil]]).andReturn([BFTask taskWithResult:user]);
 
     XCTestExpectation *expectation = [self currentSelectorTestExpectation];
     [[PFAnonymousUtils logInInBackground] continueWithSuccessBlock:^id(BFTask *task) {
@@ -89,7 +90,7 @@
     }]]);
 
     PFUser *user = [PFUser user];
-    [OCMExpect([authController logInUserAsyncWithAuthType:@"anonymous"]) andReturn:[BFTask taskWithResult:user]];
+    OCMExpect([authController logInUserAsyncWithAuthType:@"anonymous" authData:[OCMArg isNotNil]]).andReturn([BFTask taskWithResult:user]);
 
     XCTestExpectation *expectation = [self currentSelectorTestExpectation];
     [PFAnonymousUtils logInWithBlock:^(PFUser *resultUser, NSError *error) {
@@ -109,7 +110,7 @@
     }]]);
 
     PFUser *user = [PFUser user];
-    [OCMExpect([authController logInUserAsyncWithAuthType:@"anonymous"]) andReturn:[BFTask taskWithResult:user]];
+    OCMExpect([authController logInUserAsyncWithAuthType:@"anonymous" authData:[OCMArg isNotNil]]).andReturn([BFTask taskWithResult:user]);
 
     XCTestExpectation *expectation = [self currentSelectorTestExpectation];
 
