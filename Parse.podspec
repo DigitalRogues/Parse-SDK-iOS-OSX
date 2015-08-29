@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 
   s.source           = { :git => "https://github.com/ParsePlatform/Parse-SDK-iOS-OSX.git", :tag => s.version.to_s }
 
-  s.platform = :ios, :osx
+  s.platform = :ios, :osx, :watchos
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.9'
   
